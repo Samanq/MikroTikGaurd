@@ -104,3 +104,6 @@ try:
 
 except Exception as e:
     print(f"Error during operation: {e}")
+
+# Keep console open until user presses Enter
+input("\nPress Enter to exit...")
