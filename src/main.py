@@ -6,6 +6,7 @@ HOST = '192.168.1.88'   # Replace with your MikroTik IP
 USERNAME = 'admin'      # Replace with your username
 PASSWORD = 'admin'      # Replace with your password
 PORT = 8728             # Default API port (change if customized)
+RESTORE_DELAY = 15 * 60 # 15 minutes wait time before restoration
 
 def connect_to_router():
     print(f"Attempting to connect to {HOST}:{PORT} with username '{USERNAME}'...")
@@ -44,9 +45,8 @@ try:
         try:
             import time
             
-            # Wait for 1 minute with countdown
-            total_seconds = 60
-            for remaining in range(total_seconds, 0, -1):
+            # Wait for 15 minutes with countdown
+            for remaining in range(RESTORE_DELAY, 0, -1):
                 sys.stdout.write(f"\rBackup will be restored in {remaining} seconds")
                 sys.stdout.flush()
                 time.sleep(1)
