@@ -1,0 +1,7 @@
+{
+    "Host": "192.168.1.88",
+    "Username": "admin",
+    "Password": "admin",
+    "Port": 8728,
+    "RestoreDelay": 900
+}

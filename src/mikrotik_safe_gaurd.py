@@ -1,12 +1,24 @@
 from routeros_api import RouterOsApiPool
 import sys
+import json
+import os
 
-# MikroTik connection details
-HOST = '192.168.1.88'   # Replace with your MikroTik IP
-USERNAME = 'admin'      # Replace with your username
-PASSWORD = 'admin'      # Replace with your password
-PORT = 8728             # Default API port (change if customized)
-RESTORE_DELAY = 15 * 60 # 15 minutes wait time before restoration
+# Load settings from JSON file
+settings_path = os.path.join(os.path.dirname(__file__), 'settings.json')
+try:
+    with open(settings_path, 'r') as f:
+        settings = json.load(f)
+    
+    # MikroTik connection details from settings.json
+    HOST = settings['Host']
+    USERNAME = settings['Username']
+    PASSWORD = settings['Password']
+    PORT = settings['Port']
+    RESTORE_DELAY = settings['RestoreDelay']
+except Exception as e:
+    print(f"Error loading settings: {e}")
+    print("Cannot continue without valid settings. Please check your settings.json file.")
+    sys.exit(1)
 
 def connect_to_router():
     print(f"Attempting to connect to {HOST}:{PORT} with username '{USERNAME}'...")
